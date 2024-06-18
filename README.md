@@ -1,5 +1,7 @@
 The result of running `npm run build` is below.
 
+The [app/card/[cardid]/page.tsx](app/card/[cardid]/page.tsx) uses a function `getDataForCard` which is expensive. How do I cache it when running `npm run build` (ie. building the static site).
+
 It's unclear how to cache `getDataForCard` - it gets called multiple times for each page.
 
 ```
