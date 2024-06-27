@@ -1,4 +1,5 @@
-import { getDataForCard } from '@/app/lib/database';
+// import { getDataForCard } from '@/app/lib/database';
+import { CacheManager } from '@/app/lib/database';
 import { Metadata, ResolvingMetadata } from 'next';
 
 export const revalidate = 43200; // # of seconds to wait before revalidation.  Here we wait half a day.
@@ -15,7 +16,7 @@ export async function generateMetadata(
   // read route params
   const id = params.cardid;
   console.log(`IN card/[cardid]/page generateMetadata for ${id}`);
-  const cardData = await getDataForCard(params.cardid);
+  const cardData = await CacheManager.getDataForCard(params.cardid);
 
   const title = cardData?.id.concat(' - Woohoo');
   return {
@@ -25,7 +26,7 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: { cardid: string } }) {
   console.log('IN card/[cardid]/page pate.tsx with ', params);
-  const cardData = await getDataForCard(params.cardid);
+  const cardData = await CacheManager.getDataForCard(params.cardid);
   return (
     <main className="flex min-h-screen flex-col items-center  p-24">
       <h2>
